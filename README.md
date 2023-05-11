@@ -33,7 +33,7 @@ npx ghcd@latest neuefische/web-exercises/tree/main/sessions/recap-project-3/rick
 
 ---
 
-## Tasks
+## Tasks 
 
 ### Character Card Component
 
