@@ -31,6 +31,7 @@ function loopAndAppend(charArray){
 
 const initialCharacters= await fetchCharacters(page);
 loopAndAppend(initialCharacters);
+pageNumber(page,maxPage)
 
 nextButton.addEventListener("click", async()=>{
   if(page===maxPage){
@@ -41,7 +42,8 @@ nextButton.addEventListener("click", async()=>{
   console.log(page);
   const characters= await fetchCharacters(page);
   console.log(characters);
-  loopAndAppend(characters) 
+  loopAndAppend(characters);
+  pageNumber(page, maxPage);
 });
 
 prevButton.addEventListener("click", async()=>{
@@ -53,5 +55,10 @@ prevButton.addEventListener("click", async()=>{
   console.log(page);
   const characters= await fetchCharacters(page);
   console.log(characters);
-  loopAndAppend(characters) 
+  loopAndAppend(characters);
+  pageNumber(page, maxPage)
 });
+
+function pageNumber(page, maxPage){
+  pagination.textContent=`${page} / ${maxPage}`;
+};
