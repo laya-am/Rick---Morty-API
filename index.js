@@ -39,6 +39,7 @@ pageNumber(page,maxPage)
 
 
 nextButton.addEventListener("click", async()=>{
+  console.log("page: ", page);
   maxPage= (await fetchCharacters(page, searchQuery)).info.pages;
   if(page===maxPage){
     return;
@@ -62,7 +63,7 @@ prevButton.addEventListener("click", async()=>{
   const characters= (await fetchCharacters(page, searchQuery)).results;
   console.log(characters);
   loopAndAppend(characters);
-  pageNumber(page, maxPage)
+  pageNumber(page, maxPage);
 });
 
 function pageNumber(page, maxPage){
@@ -76,16 +77,19 @@ searchBar.addEventListener("submit", async (e) => {
   console.log(searchQuery);
   cardContainer.innerHTML= "";
   let searchResult= (await fetchCharacters(page, searchQuery));
-  if(searchResult.includes("error")){
+  let searchedCharacter= searchResult.results
+  console.log("search result: ", searchResult);
+  
+  if(!searchedCharacter){
     console.log("error: 'There is nothing here'");
     const message= document.createElement("h3");
     message.textContent= "error: 'There is nothing here'"
     return cardContainer.append(message);
   };
-  let searchedCharacter= searchResult.results
-  console.log("search result: ", searchResult);
-  const maxPage= (await fetchCharacters(page, searchQuery)).info.pages;
+
+  maxPage= (await fetchCharacters(page, searchQuery)).info.pages;
   console.log("maxpage inside submit is: ", maxPage);
+  pageNumber(1, maxPage);
  
   loopAndAppend(searchedCharacter);
 });
